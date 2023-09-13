@@ -50,7 +50,7 @@ Before running the API, you need to configure it. Create a .env file in the proj
 
 
 ## API Endpoints
-### Create a New Person
+### Create New Person
 
 - **URL:** `/`
 - **Method:** POST
@@ -68,20 +68,60 @@ Before running the API, you need to configure it. Create a .env file in the proj
    }
    ```
 
-### Retrieve a specific person
+### Retrieve specific person
 
-- **URL:** `/id`
+- **URL:** `/:id`
 - **Method:** GET
-- **URL Request Parameter:**
 
-   ```bash
-   GET http://localhost:3500/id
-   ```
 - **Response**
    ```json
    {
-      "_id": "id",
+      "_id": id,
       "name": "Yoma",
       "__v": 0
    }
+   ```
+
+### Update person by Id
+
+- **URL:** `/:id`
+- **Method:** PUT
+- **URL Request Parameter:**
+  ```react
+   http://localhost:3500/id
+  ```
+- **Request Body:**
+
+   ```json
+   {
+      "name": "Updated Name"
+   }
+   ```
+
+- **Response**
+   ```json
+   {
+      "_id": id,
+      "name": "Updated Name",
+      "__v": 0
+   }
+   ```
+
+### Delete person by Id
+
+- **URL:** `/:id`
+- **Method:** DELETE
+- **URL Request Parameter:**
+  ```react
+   http://localhost:3500/id
+  ```
+- **Request Body:**
+
+   ```bash
+   http://localhost:3500/id
+   ```
+
+- **Response**
+   ```json
+       "message": "User deleted Successfully"
    ```

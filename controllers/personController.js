@@ -117,7 +117,9 @@ const deletePerson = asyncHandler(async (req, res) => {
     }
 
     const deletedPerson = await person.deleteOne({ _id: req.params.id })
-    res.json(deletedPerson);
+    res.json({
+        message: `${deletedPerson.name} deleted Successfully`,
+    });
 })
 
 module.exports = {
