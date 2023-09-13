@@ -49,10 +49,10 @@ Before running the API, you need to configure it. Create a .env file in the proj
 2. This will make the API available at **http://localhost:3500**
 
 
-## API Endpoints & Sample Usage
+## API Endpoints
 ### Create New Person
 
-- **URL:** `/`
+- **URL:** `/api`
 - **Method:** POST
 - **Request Body:**
 
@@ -64,19 +64,24 @@ Before running the API, you need to configure it. Create a .env file in the proj
 - **Response**
    ```json
    {
-      "message": "New Person Yoma created"
+      "message": "New Person Yoma created", 
+      "person": {
+         "name": "Yoma", 
+         "_id": "xxxxxxxxxxxxxxxxxxxxxxxx",
+         "_v": 0
+      }
    }
    ```
 
 ### Retrieve specific person
 
-- **URL:** `/:id`
+- **URL:** `/api/:id`
 - **Method:** GET
 
 - **Response**
    ```json
    {
-      "_id": <id>,
+      "_id": <person-id>,
       "name": "Yoma",
       "__v": 0
    }
@@ -84,11 +89,11 @@ Before running the API, you need to configure it. Create a .env file in the proj
 
 ### Update person by Id
 
-- **URL:** `/:id`
+- **URL:** `/api/:id`
 - **Method:** PUT
 - **URL Request Parameter:**
   ```react
-   http://localhost:3500/id
+   http://localhost:3500/api/id
   ```
 - **Request Body:**
 
@@ -101,7 +106,7 @@ Before running the API, you need to configure it. Create a .env file in the proj
 - **Response**
    ```json
    {
-      "_id": <id>,
+      "_id": <person-id>,
       "name": "Updated Name",
       "__v": 0
    }
@@ -109,19 +114,135 @@ Before running the API, you need to configure it. Create a .env file in the proj
 
 ### Delete person by Id
 
-- **URL:** `/:id`
+- **URL:** `/api/:id`
 - **Method:** DELETE
 - **URL Request Parameter:**
-  ```react
-   http://localhost:3500/id
+  ```bash
+   http://localhost:3500/api/id
   ```
-- **Request Body:**
-
-   ```bash
-   http://localhost:3500/id
-   ```
 
 - **Response**
    ```json
-       "message": "User deleted Successfully"
+   "message": "<person-name> deleted Successfully"
    ```
+
+## Sample Usage
+### Create New Person
+
+- **URL:** `/api`
+- **Method:** POST
+- **Request Body:**
+
+   ```json
+   {
+      "name": "Yoma"
+   }
+   ```
+- **Response(200)**
+   ```json
+   {
+      "message": "New Person Yoma created",
+      "person": {
+         "name": "Yoma",
+         "_id": "65019c5f7ff6b6379a5a2f23",
+         "__v": 0
+      }
+   }
+   ```
+- **Response(Error)**
+  - HTTP Status Code: 400: Invalid person data received
+  - HTTP Status Code: 409: Duplicate name
+
+### Retrieve specific person
+
+- **URL:** `/api/:id`
+- **Method:** GET
+- **URL Request Parameter:**
+  ```bash
+   http://localhost:3500/api/65019c5f7ff6b6379a5a2f23
+  ```
+
+- **Response(200)**
+   ```json
+   {
+      "_id": "65019c5f7ff6b6379a5a2f23",
+      "name": "Yoma",
+      "__v": 0
+   }
+   ```
+- **Response(Error)**
+  - HTTP Status Code 400
+      ```json
+         {
+            "message": "No Person matches ID 65019c5f7ff6b6379a5a2f22"
+         }
+      ```
+
+### Update person by Id
+
+- **URL:** `/api/65019c5f7ff6b6379a5a2f23`
+- **Method:** PUT
+- **URL Request Parameter:**
+  ```bash
+   http://localhost:3500/api/65019c5f7ff6b6379a5a2f23
+  ```
+- **Request Body:**
+
+   ```json
+   {
+      "name": "Emore Yoma"
+   }
+   ```
+
+- **Response(200)**
+   ```json
+   {
+      "_id": "65019c5f7ff6b6379a5a2f23",
+      "name": "Emore Yoma",
+      "__v": 0
+   }
+   ```
+- **Response(Error)**
+  - HTTP Status Code 400 (wrong ID entered)
+  
+      ```bash
+         {
+            "message": "No Person matches ID undefined"
+         }
+      ```
+   - HTTP Status Code 400 (No Name entered)
+      ```bash
+         {
+            "message": "Person Name required"
+         }
+      ```
+
+### Delete person by Id
+
+- **URL:** `/api/65019c5f7ff6b6379a5a2f23`
+- **Method:** DELETE
+- **URL Request Parameter:**
+  ```bash
+   http://localhost:3500/api/65019c5f7ff6b6379a5a2f23
+  ```
+
+- **Response(Success)**
+   ```json
+      {
+         "message": "Emore Yoma deleted Successfully",
+         "person": {
+            "_id": "65019c5f7ff6b6379a5a2f23",
+            "name": "Emore Yoma",
+            "__v": 0
+         }
+      }
+   ```
+
+- **Response(Error)**
+   - HTTP Status Code 400
+      ```bash
+         {
+            "message": "No Person matched ID 65019c5f7ff6b6379a5a2f22"
+         }
+      ```
+

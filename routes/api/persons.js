@@ -4,7 +4,7 @@ const personController = require('../../controllers/personController')
 
 router.route('/')
     .post(personController.createNewPerson) // add a middleware to check and handle error
-    
+
     router.route('/:id')
     .get(personController.getPerson)
     .put(personController.updatePerson)

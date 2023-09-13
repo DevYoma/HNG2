@@ -30,7 +30,10 @@ const createNewPerson = asyncHandler(async (req, res) => {
     const person = await Person.create(newPerson)
 
     if(person){
-        res.status(201).json({ message: `New Person ${name} created` })
+        res.status(201).json({ 
+            message: `New Person ${name} created`,
+            person: person
+        })
     }else{
         res.status(400).json({ message: "Invalid person data received" })
     }
@@ -74,7 +77,7 @@ const updatePerson = asyncHandler(async (req, res) => {
     // finding the person
     const foundPerson = await Person.findOne({ _id: req.params.id }).exec();
     if(!foundPerson){
-        return res.status(204).json({
+        return res.status(400).json({
             message: `No Person matches ID ${req.body.id}`
         })
     }
@@ -97,7 +100,7 @@ const deletePerson = asyncHandler(async (req, res) => {
     const person = await Person.findOne({ _id: req.params.id }).exec();
 
     if(!person){
-        return res.status(204).json({
+        return res.status(400).json({
             message: `No Person matched ID ${req.params.id}`
         })
     }
@@ -105,6 +108,7 @@ const deletePerson = asyncHandler(async (req, res) => {
     const deletedPerson = await person.deleteOne({ _id: req.params.id })
     res.json({
         message: `${deletedPerson.name} deleted Successfully`,
+        person: deletedPerson
     });
 })
 
