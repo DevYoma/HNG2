@@ -76,7 +76,7 @@ Before running the API, you need to configure it. Create a .env file in the proj
 - **Response**
    ```json
    {
-      "_id": id,
+      "_id": <person-id>,
       "name": "Yoma",
       "__v": 0
    }
@@ -101,7 +101,7 @@ Before running the API, you need to configure it. Create a .env file in the proj
 - **Response**
    ```json
    {
-      "_id": id,
+      "_id": <person-id>,
       "name": "Updated Name",
       "__v": 0
    }
