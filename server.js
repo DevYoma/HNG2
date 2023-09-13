@@ -5,8 +5,6 @@ const PORT = process.env.PORT || 3500;
 const connectDB = require('./config/dbConn');
 const mongoose = require('mongoose');
 
-console.log(process.env.NODE_ENV);
-
 connectDB()
 
 app.use(express.json()); // receive and parse JSON

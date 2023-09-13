@@ -4,7 +4,6 @@ const personController = require('../../controllers/personController')
 
 router.route('/')
     .post(personController.createNewPerson) // add a middleware to check and handle error
-    .get(personController.getAllPersons) // remove this one
     
     router.route('/:id')
     .get(personController.getPerson)

@@ -2,20 +2,6 @@ const Person = require('../models/PersonModel')
 
 const asyncHandler = require('express-async-handler');
 
-// @desc Get all users
-const getAllPersons = asyncHandler(async (req, res) => {
-    const persons = await Person.find().lean();
-
-    if(!persons || persons.length === 0){
-        return res.status(400).json({
-            message: "No person found"
-        })
-    }
-
-    res.json(persons)
-})
-
-
 // @desc Create new user
 const createNewPerson = asyncHandler(async (req, res) => {
     const { name } =  req.body; 
@@ -123,7 +109,6 @@ const deletePerson = asyncHandler(async (req, res) => {
 })
 
 module.exports = {
-    getAllPersons,
     createNewPerson, 
     getPerson,
     updatePerson,
