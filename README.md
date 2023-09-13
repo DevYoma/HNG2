@@ -49,7 +49,7 @@ Before running the API, you need to configure it. Create a .env file in the proj
 2. This will make the API available at **http://localhost:3500**
 
 
-## API Endpoints
+## API Endpoints & Sample Usage
 ### Create New Person
 
 - **URL:** `/`
