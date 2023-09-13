@@ -10,7 +10,7 @@ connectDB()
 app.use(express.json()); // receive and parse JSON
 
 // app.use('/person')
-app.use('/', require('./routes/api/persons'))
+app.use('/api', require('./routes/api/persons'))
 
 
 mongoose.connection.once('open', () => {
